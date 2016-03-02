@@ -12,7 +12,7 @@
       var d, i, len;
       for (i = 0, len = data.length; i < len; i++) {
         d = data[i];
-        if (/jpg/.test(d.path)){
+        if (/(jpg|gif|bmp|ico|png|svg)$/.test(d.path)){
           listEl += "<li><a href=\"" + (siteUrl + d.path) + "\">" + d.name + "</a></li>";
         }
       }
