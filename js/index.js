@@ -1,23 +1,18 @@
-(function() {
-  var listEl, siteUrl;
-
-  siteUrl = "http://fa7ad.github.io/imgcdn/";
-
-  listEl = "";
+($ => {
+  "use strict";
+  const siteUrl = "http://fa7ad.github.io/imgcdn/";
+  let listElements = "";
 
   $.ajax({
     url: "https://api.github.com/repos/fa7ad/imgcdn/contents",
     method: "get",
-    success: function(data) {
-      var d, i, len;
-      for (i = 0, len = data.length; i < len; i++) {
-        d = data[i];
-        if (/(jpg|gif|bmp|ico|png|svg)$/.test(d.path)){
-          listEl += "<li><a href=\"" + (siteUrl + d.path) + "\">" + d.name + "</a></li>";
-        }
-      }
-      return $("#list").html(listEl);
+    success: files => {
+      files.forEach(file => {
+        if (/(jpeg|jpg|gif|bmp|ico|png|svg)$/.test(file.path))
+          listElements += `<li><a href="${siteUrl + file.path}">${file.name}</a></li>`;
+      });
+      $("#list").html(listElements);
     }
   });
 
-}).call(this);
+})(jQuery);
